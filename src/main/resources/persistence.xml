@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit name="PrimaryDB" transaction-type="RESOURCE_LOCAL">
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.net1.netswitch.database.Bin</class>
+        <class>com.net1.netswitch.database.Channels</class>
+        <class>com.net1.netswitch.database.ExceptionEvents</class>
+        <class>com.net1.netswitch.database.KeyGroup</class>
+        <class>com.net1.netswitch.database.Mcc</class>
+        <class>com.net1.netswitch.database.MonitoredService</class>
+        <class>com.net1.netswitch.database.NetswitchMsg</class>
+        <class>com.net1.netswitch.database.NotifyGroups</class>
+        <class>com.net1.netswitch.database.NotifyGroupUserLinks</class>
+        <class>com.net1.netswitch.database.NotifyStatusLinks</class>
+        <class>com.net1.netswitch.database.NotifyUsers</class>
+        <class>com.net1.netswitch.database.NotifyType</class>
+        <class>com.net1.netswitch.database.PeriodHistory</class>
+        <class>com.net1.netswitch.database.RecentNetswitchMsg</class>
+        <class>com.net1.netswitch.database.StatusClient</class>
+        <class>com.net1.netswitch.database.StatusStandby</class>
+        <class>com.net1.netswitch.database.StatusStandbyLinks</class>
+        <class>com.net1.netswitch.database.StatusUnit</class>
+        <class>com.net1.netswitch.database.StatusUnitClientLinks</class>
+        <class>com.net1.netswitch.database.StatusUnitType</class>
+        <class>com.net1.netswitch.database.Transaction</class>
+        <class>com.net1.netswitch.database.ServiceState</class>
+        <class>com.net1.netswitch.database.NotificationMessage</class>
+        <class>com.net1.netswitch.database.CompetitionConfig</class>
+        <class>com.net1.netswitch.database.HotCards</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="@primaryDB.hbm2ddl@" />
+            <property name="hibernate.id.new_generator_mappings" value="true"/>
+            <property name="hibernate.show_sql" value="@primaryDB.show_sql@"/>
+            <property name="jboss.as.jpa.managed" value="false" />
+            
+            <!-- Hikari CP uses milliseconds for all time values -->
+            <property name="hibernate.connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
+            <property name="hibernate.hikari.minimumIdle" value="5"/>
+            <property name="hibernate.hikari.maximumPoolSize" value="80"/>
+            <property name="hibernate.hikari.idleTimeout" value="60000"/>
+            <property name="hibernate.hikari.connectionTimeout" value="20000"/>
+            <property name="hibernate.hikari.validationTimeout" value="5000"/>
+            <property name="hibernate.hikari.maxLifetime" value="900000"/>
+            <property name="hibernate.hikari.leakDetectionThreshold" value="40000"/>
+            <property name="hibernate.hikari.driverClassName" value="org.h2.Driver"/>
+            <property name="hibernate.hikari.jdbcUrl" value="jdbc:h2:tcp://localhost/~/invoiceDB"/>
+            <property name="hibernate.hikari.dataSource.user" value="@primaryDB.user@"/>
+            <property name="hibernate.hikari.dataSource.password" value="@primaryDB.password@"/>
+            <property name="hibernate.hikari.poolName" value="poolPrimaryDB"/>
+            <property name="hibernate.hikari.registerMbeans" value="true"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="containerRDBMS" transaction-type="JTA">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <jta-data-source>java:/MSAcq</jta-data-source>
+        <class>com.net1.netswitch.database.KeyGroup</class>
+        <class>com.net1.netswitch.database.Channels</class>
+        <class>com.net1.netswitch.database.Bin</class>
+        <class>com.net1.netswitch.database.StatusClient</class>
+        <class>com.net1.netswitch.database.StatusStandby</class>
+        <class>com.net1.netswitch.database.StatusUnit</class>
+        <class>com.net1.netswitch.database.StatusUnitClientLinks</class>
+        <class>com.net1.netswitch.database.StatusUnitType</class>
+        <!--class>com.net1.netswitch.database.Transaction</class>
+        <class>com.net1.netswitch.database.MastercardSmsTransaction</class>
+        <class>com.net1.netswitch.database.BankservATMTransaction</class-->
+        <!--class>com.net1.netswitch.database.ATMBase24Transaction</class>
+        <class>com.net1.netswitch.database.CMFTransaction</class>
+        <class>com.net1.netswitch.database.Net1AtmTransaction</class-->
+        <class>com.net1.netswitch.database.Mcc</class>
+        <class>com.net1.netswitch.database.MonitoredService</class>
+        <class>com.net1.netswitch.database.ExceptionEvents</class>
+        <class>com.net1.netswitch.database.NotifyGroups</class>
+        <class>com.net1.netswitch.database.NotifyUsers</class>
+        <class>com.net1.netswitch.database.NotifyType</class>
+        <class>com.net1.netswitch.database.NotifyStatusLinks</class>
+        <class>com.net1.netswitch.database.NotifyGroupUserLinks</class>
+        <class>com.net1.netswitch.database.MonitoredService</class>
+        <class>com.net1.netswitch.database.ServiceState</class>
+        <class>com.net1.netswitch.database.NotifyType</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/invoiceDB" />
+
+            <property name="hibernate.hbm2ddl.auto" value="@primaryDB.hbm2ddl@" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
+            <property name="hibernate.connection.url" value="jdbc:h2:tcp://localhost/~/invoiceDB"/>
+            <property name="hibernate.connection.driver_class" value="org.h2.Driver" />
+            <property name="hibernate.connection.username" value="@primaryDB.user@"/>
+            <property name="hibernate.connection.password" value="@primaryDB.password@"/>
+
+            <property name="hibernate.c3p0.min_size" value="5"/>
+            <property name="hibernate.c3p0.max_size" value="100"/>
+            <property name="hibernate.c3p0.acquire_increment" value="3"/>
+            <property name="hibernate.c3p0.timeout" value="3600"/>
+            <property name="hibernate.c3p0.maxIdleTimeExcessConnections" value="60"/>
+            <property name="hibernate.c3p0.max_statements" value="10"/>
+            <property name="hibernate.c3p0.idle_test_period" value="300"/>
+            <property name="hibernate.c3p0.unreturnedConnectionTimeout" value="@primaryDB.unreturnedConnectionTimeout@"/>
+            <property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces" value="@primaryDB.debugStackTrace@"/>
+
+            <property name="hibernate.id.new_generator_mappings" value="true"/>
+            <property name="hibernate.show_sql" value="@primaryDB.show_sql@"/>
+        </properties>
+    </persistence-unit>
+</persistence>
