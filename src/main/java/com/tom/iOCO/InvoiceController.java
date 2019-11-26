@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 // Controller
-@RestController
+//@RestController
 public class InvoiceController
 {
     private Logger logger = LoggerFactory.getLogger(this.getClass());

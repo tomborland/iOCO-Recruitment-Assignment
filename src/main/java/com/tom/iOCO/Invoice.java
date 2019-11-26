@@ -13,7 +13,7 @@ public class Invoice
 {
     @Id
     @GeneratedValue
-    private Integer Id;
+    private Integer id;
 
     @Size(min=2, message = "Client must have 2 or more characters")
     @ApiModelProperty(notes = "Client must have 2 or more characters")
@@ -25,12 +25,12 @@ public class Invoice
 
     public Integer getId()
     {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id)
     {
-        Id = id;
+        this.id = id;
     }
 
     public String getClient()

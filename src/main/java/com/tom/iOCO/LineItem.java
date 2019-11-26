@@ -5,12 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 
-@ApiModel(description = "Details about the Item")
+//@ApiModel(description = "Details about the Item")
 @Entity
 public class LineItem
 {
     @Id
-    @GeneratedValue
+    //@GeneratedValue
     private Long id;
 
     private Long quality;
