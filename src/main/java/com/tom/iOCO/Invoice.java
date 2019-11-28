@@ -13,22 +13,34 @@ public class Invoice
 {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
 
-    @Size(min=2, message = "Client must have 2 or more characters")
-    @ApiModelProperty(notes = "Client must have 2 or more characters")
+    //@Size(min=2, message = "Client must have 2 or more characters")
+    //@ApiModelProperty(notes = "Client must have 2 or more characters")
     private String client;
 
     private Long vatRate;
 
     private Date invoiceDate;
 
-    public Integer getId()
+    public Invoice(Long id, String client, Long vatRate, Date invoiceDate)
+    {
+        this.id          = id;
+        this.client      = client;
+        this.vatRate     = vatRate;
+        this.invoiceDate = invoiceDate;
+    }
+
+    public Invoice()
+    {
+    }
+
+    public Long getId()
     {
         return id;
     }
 
-    public void setId(Integer id)
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -66,16 +78,26 @@ public class Invoice
     public BigDecimal getSubTotal()
     {
         return BigDecimal.valueOf(1);
-    }
+    } // fix
 
     public BigDecimal getVat()
     {
         return BigDecimal.valueOf(1);
-    }
+    } // Fix
 
     public BigDecimal getTotal()
     {
         return BigDecimal.valueOf(1);
-    }
+    } // Fix
 
+    @Override
+    public String toString()
+    {
+        return "Invoice{" +
+               "id=" + id +
+               ", client='" + client + '\'' +
+               ", vatRate=" + vatRate +
+               ", invoiceDate=" + invoiceDate +
+               '}';
+    }
 }

@@ -61,6 +61,6 @@ public class LineItem
 
     BigDecimal getLineItemTotal()
     {
-
+        return new BigDecimal(1);
     }
 }
